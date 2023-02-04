@@ -1,0 +1,12 @@
+com.kotlindiscord.kord.extensions:*
+                  ^^^^^^^^^^^^^^^
+
+dev.kord.x:emoji
+    ^^^^^^.^^^^^
+
+dev.kord.cache:cache-map
+    ^^^^.      ^^^^^^^^^
+
+ch.qos.logback:logback-classic
+               ^^^^^^^^^^^^^^^
+

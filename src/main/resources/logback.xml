@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<configuration debug="false">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%boldBlue(%date{dd-MM-yyyy'T'HH:mm:ssZ}) %highlight(%.-1level .\(%file:%line\) %thread %logger{0}) -
+                %msg %highlight(%mdc) %n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC-STDOUT" class="ch.qos.logback.classic.AsyncAppender" queueSize="2048">
+        <appender-ref ref="STDOUT"/>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+
+    <logger name="org.apache" level="ERROR"/>
+    <logger name="io.grpc.netty" level="WARN"/>
+    <!-- skip logging the entire schema on every restart (lot of noise in the logs); use the playground-->
+    <logger name="com.expediagroup.graphql.server.spring.SchemaAutoConfiguration" level="WARN"/>
+    <logger name="com.expediagroup.graphql.server.spring.NonFederatedSchemaAutoConfiguration" level="WARN"/>
+    <!-- Logs a lot of warnings because of weird people calling our API -->
+    <logger name="io.grpc.netty.shaded.io.netty.util.internal.MacAddressUtil" level="ERROR"/>
+    <logger name="io.netty.util.internal.MacAddressUtil" level="ERROR"/>
+    <logger name="reactor.netty.channel.FluxReceive" level="ERROR"/>
+    <logger name="reactor.netty.http.server.HttpServerOperations" level="ERROR" />
+    <logger name="io.lettuce.core.RedisChannelHandler" level="ERROR"/>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC-STDOUT"/>
+    </root>
+</configuration>
